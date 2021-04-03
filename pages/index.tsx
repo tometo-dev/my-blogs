@@ -18,7 +18,7 @@ const Index = ({ allPosts }: Props) => {
     <>
       <Layout>
         <Head>
-          <title>Sudhanshu's Blog</title>
+          <title>Sudhanshu's Corner</title>
         </Head>
         <Container>
           <Intro />

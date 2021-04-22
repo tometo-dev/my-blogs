@@ -1,5 +1,5 @@
 ---
-title: "CI/CD pipeline with Docker, Github actions, Dockerhub and CD with Watchtower"
+title: "CI/CD pipeline with Docker, Github actions and Dockerhub, and CD with Watchtower"
 excerpt: "A CI/CD pipeline for the development phase"
 coverImage: "/assets/blog/ci-cd-pipeline-watchtower/cover.jpg"
 date: "2021-04-09T08:25:04.20Z"
@@ -99,7 +99,7 @@ The center part of this entire pipeline is _watchtower_.
 
 > With watchtower you can update the running version of your containerized app simply by pushing a new image to the Docker Hub or your own image registry.
 
-Basically, with watchtower, whenever the image updates in the registry (like Dockerhub), the container is updated with the latest changes.
+Basically, you run watchtower in your local machine, give it the container of your image to track, and, whenever that image gets updated in the registry (like Dockerhub), the container is updated with the latest changes.
 
 Watchtower can be run with the following command:
 
@@ -110,15 +110,15 @@ $ docker run -d \
     containrrr/watchtower
 ```
 
-Watchtower supports many configuration options. I will not be going deep into watchtower; refer to their official documentation for more information.
+Watchtower supports many configuration options. I will not be going deep into watchtower as their documentation explains every bits and pieces; refer to their official documentation for more information.
 
 - [github repo](https://github.com/containrrr/watchtower)
 - [documentation](https://containrrr.dev/watchtower/)
 
 ---
 
-Doing these, you have successfully made your CI/CD pipeline which gets updated whenever changes are pushed to the github repo.
-The local container takes some time to update once the updated image is pushed to the registry, but setting these whole workflow is simple and works beautifully, at least for the development environment.
+Doing these, you have successfully made your CI/CD pipeline which gets deployed and the container updated whenever changes are pushed to the github repo.
+The local container takes some time to update once the updated image is pushed to the registry, but setting this whole workflow is simple and works beautifully, at least for the development environment.
 
 ---
 

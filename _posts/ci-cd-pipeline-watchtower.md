@@ -1,5 +1,5 @@
 ---
-title: "CI/CD pipeline with Docker, Github actions, Dockerhub and Watchtower"
+title: "CI/CD pipeline with Docker, Github actions, Dockerhub and CD with Watchtower"
 excerpt: "A CI/CD pipeline for the development phase"
 coverImage: "/assets/blog/ci-cd-pipeline-watchtower/cover.jpg"
 date: "2021-04-09T08:25:04.20Z"
@@ -10,7 +10,7 @@ ogImage:
   url: "/assets/blog/ci-cd-pipeline-watchtower/cover.jpg"
 ---
 
-I wanted to setup a CI/CD pipeline where my application would finally be deployed on my local machine while also using the sweet stuff that github provided with github-actions, _local-machine_ being the key here.
+I wanted to setup a CI/CD and deployment pipeline where my application would finally be deployed on my local machine while also using the sweet stuff that github provided with github-actions, _local-machine_ being the key here.
 
 There can be many situations where you want the deployment to be local, particularly during the development phase, to:
 
@@ -24,7 +24,8 @@ There can be many situations where you want the deployment to be local, particul
 
 ### 1. Dockerizing your application
 
-"Docker is an open platform for developing, shipping, and running applications"
+> Docker is an open platform for developing, shipping, and running applications
+
 Docker is like a VM but with only the parts necessary to run your applications. Docker provides a comprehensive guide on developing with docker in their documentation, which can be found [here](https://docs.docker.com/develop/).
 
 To "dockerize" an app, you write a Dockerfile. Here's an example of a dockerfile.
@@ -96,10 +97,20 @@ The example above uses a custom script `ci:docker` to build the docker-image, lo
 
 The center part of this entire pipeline is _watchtower_.
 
-"With watchtower you can update the running version of your containerized app simply by pushing a new image to the Docker Hub or your own image registry."
+> With watchtower you can update the running version of your containerized app simply by pushing a new image to the Docker Hub or your own image registry.
 
 Basically, with watchtower, whenever the image updates in the registry (like Dockerhub), the container is updated with the latest changes.
-Watchtower supports many configuration options; refer to their official documentation for more information.
+
+Watchtower can be run with the following command:
+
+```
+$ docker run -d \
+    --name watchtower \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    containrrr/watchtower
+```
+
+Watchtower supports many configuration options. I will not be going deep into watchtower; refer to their official documentation for more information.
 
 - [github repo](https://github.com/containrrr/watchtower)
 - [documentation](https://containrrr.dev/watchtower/)
